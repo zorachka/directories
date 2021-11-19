@@ -42,6 +42,9 @@ final class DirectoriesConfig
      */
     public function withDirectory(string $alias, string $path, bool $rewrite = false): self
     {
+        Assert::notEmpty($alias);
+        Assert::notEmpty($path);
+
         $new = clone $this;
 
         $path = str_replace(['\\', '//'], '/', $path);
