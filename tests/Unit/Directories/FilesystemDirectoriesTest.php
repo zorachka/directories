@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Zorachka\Framework\Directories\Directories;
 use Zorachka\Framework\Directories\DirectoriesConfig;
-use Zorachka\Framework\Directories\DirectoryException;
+use Zorachka\Framework\Directories\Exception\CouldNotFindDirectoryWithAlias;
 use Zorachka\Framework\Directories\FilesystemDirectories;
 
 test('FilesystemDirectories should can be created from DirectoriesConfig', function () {
@@ -24,7 +24,7 @@ test('FilesystemDirectories should throw exception if directory doesn`t exists',
     ]);
     $directories = FilesystemDirectories::fromConfig($config);
     $directories->get('@directories');
-})->throws(DirectoryException::class);
+})->throws(CouldNotFindDirectoryWithAlias::class);
 
 test('FilesystemDirectories should be able check if directory exists', function () {
     $config = DirectoriesConfig::withDefaults([
