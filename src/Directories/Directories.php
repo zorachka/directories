@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace Zorachka\Framework\Directories;
 
+use Zorachka\Framework\Directories\Exception\CouldNotFindDirectoryWithAlias;
+
 interface Directories
 {
-    public const ROOT = '@root';
-    public const PUBLIC = '@public';
-
     /**
-     * @param string $name
+     * Check if directory exists.
+     * @param string $alias
      * @return bool
      */
-    public function has(string $name): bool;
+    public function has(string $alias): bool;
 
     /**
      * Get directory.
-     * @param string $name
+     * @param string $alias
      * @return string
-     * @throws DirectoryException When no directory found.
+     * @throws CouldNotFindDirectoryWithAlias When no directory found.
      */
-    public function get(string $name): string;
+    public function get(string $alias): string;
 }
