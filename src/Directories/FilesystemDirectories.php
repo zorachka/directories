@@ -6,11 +6,18 @@ namespace Zorachka\Framework\Directories;
 
 final class FilesystemDirectories implements Directories
 {
-    private DirectoriesConfig $config;
+    private array $directories;
 
-    public function __construct(DirectoriesConfig $config)
+    private function __construct(array $directories)
     {
-        $this->config = $config;
+        $this->directories = $directories;
+    }
+
+    public static function fromConfig(DirectoriesConfig $config): self
+    {
+        return new self(
+            $config->directories()
+        );
     }
 
     /**
@@ -18,7 +25,7 @@ final class FilesystemDirectories implements Directories
      */
     public function has(string $name): bool
     {
-        return array_key_exists($name, $this->config->directories());
+        return array_key_exists($name, $this->directories);
     }
 
     /**
@@ -30,6 +37,6 @@ final class FilesystemDirectories implements Directories
             throw new DirectoryException("Undefined directory '{$name}'");
         }
 
-        return $this->config->directories()[$name];
+        return $this->directories[$name];
     }
 }
