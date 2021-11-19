@@ -8,12 +8,9 @@ use Zorachka\Framework\Directories\Exception\CouldNotFindDirectoryWithAlias;
 
 final class FilesystemDirectories implements Directories
 {
-    private array $directories;
-
-    private function __construct(array $directories)
-    {
-        $this->directories = $directories;
-    }
+    private function __construct(
+        private array $directories,
+    ) {}
 
     public static function fromConfig(DirectoriesConfig $config): self
     {
