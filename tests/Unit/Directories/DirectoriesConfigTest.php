@@ -17,3 +17,13 @@ test('DirectoriesConfig should be able to add new directory', function () {
 
     expect($newConfig->directories())->toMatchArray(['@directory' => __DIR__  . '/']);
 });
+
+test('DirectoriesConfig throws exception when alias is empty string', function () {
+    $config = DirectoriesConfig::withDefaults();
+    $newConfig = $config->withDirectory('', __DIR__);
+})->throws(InvalidArgumentException::class);
+
+test('DirectoriesConfig throws exception when path is empty string', function () {
+    $config = DirectoriesConfig::withDefaults();
+    $newConfig = $config->withDirectory('@directory', '');
+})->throws(InvalidArgumentException::class);
