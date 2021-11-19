@@ -3,7 +3,7 @@
     "description": "Zorachka Directories",
     "keywords": [
         "zorachka",
-        "Directories"
+        "directories"
     ],
     "homepage": "https://github.com/zorachka/directories",
     "license": "MIT",
@@ -15,12 +15,11 @@
         }
     ],
     "require": {
-        "php": "^8.0"
-    },
-    "suggest": {
-        "zorachka/container": "For DirectoriesServiceProvider"
+        "php": "^8.0",
+        "zorachka/container": "^1.0"
     },
     "require-dev": {
+        "pestphp/pest": "^1.21",
         "roave/security-advisories": "dev-latest"
     },
     "autoload": {

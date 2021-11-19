@@ -6,7 +6,11 @@ namespace Zorachka\Framework\Directories;
 
 final class DirectoriesConfig
 {
-    private array $directories;
+    private array $directories = [];
+
+    private function __construct()
+    {
+    }
 
     public static function withDefaults(array $directories = []): self
     {
@@ -25,9 +29,8 @@ final class DirectoriesConfig
     }
 
     /**
-     * @param string $name Directory alias, ie. "framework".
+     * @param string $name Directory alias, ie. "@public".
      * @param string $path Directory path without ending slash.
-     * @throws DirectoryException
      */
     public function withDirectory(string $name, string $path): self
     {
