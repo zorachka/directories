@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "zorachka/container": "^1.0"
+        "zorachka/container": "^2.0"
     },
     "require-dev": {
         "pestphp/pest": "^1.21",
