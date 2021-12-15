@@ -34,3 +34,21 @@ test('FilesystemDirectories should be able check if directory exists', function 
     expect($directories->has('@directory'))->toBeTrue();
     expect($directories->has('@directories'))->toBeFalse();
 });
+
+test('FilesystemDirectories should be able resolve directory with alias', function () {
+    $config = DirectoriesConfig::withDefaults([
+        '@root' => __DIR__,
+        '@public' => '@root/public'
+    ]);
+    $directories = FilesystemDirectories::fromConfig($config);
+    expect($directories->get('@public'))->toBe(__DIR__ . '/public/');
+});
+
+test('FilesystemDirectories should throw exception if directory with alias doesn\'t exists', function () {
+    $config = DirectoriesConfig::withDefaults([
+        '@main' => __DIR__,
+        '@public' => '@root/public'
+    ]);
+    $directories = FilesystemDirectories::fromConfig($config);
+    $directories->get('@public');
+})->throws(CouldNotFindDirectoryWithAlias::class);
