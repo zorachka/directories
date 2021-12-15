@@ -38,6 +38,25 @@ final class FilesystemDirectories implements Directories
             );
         }
 
-        return $this->directories[$alias];
+        $directory = $this->directories[$alias];
+
+        $pattern = '/^@[[:alnum:]]+/';
+        $isMatched = \preg_match($pattern, $directory, $matches);
+        if ($isMatched) {
+            $matchedAlias = $matches[0];
+
+            if (!$this->has($matchedAlias)) {
+                throw new CouldNotFindDirectoryWithAlias(
+                    \sprintf('Undefined directory with alias %s in %s', $matchedAlias, $directory)
+                );
+            }
+
+            $matchedDirectory = $this->get($matchedAlias);
+            $replaced = \preg_replace('/' . $matchedAlias . '/', $matchedDirectory, $directory);
+
+            return str_replace(['\\', '//'], '/', $replaced);
+        }
+
+        return $directory;
     }
 }
