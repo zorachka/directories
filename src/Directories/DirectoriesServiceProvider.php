@@ -15,11 +15,11 @@ final class DirectoriesServiceProvider implements ServiceProvider
     public static function getDefinitions(): array
     {
         return [
-            Directories::class => fn(ContainerInterface $container): Directories =>
+            Directories::class => static fn(ContainerInterface $container): Directories =>
                 FilesystemDirectories::fromConfig(
                     $container->get(DirectoriesConfig::class)
                 ),
-            DirectoriesConfig::class => fn() => DirectoriesConfig::withDefaults(),
+            DirectoriesConfig::class => static fn() => DirectoriesConfig::withDefaults(),
         ];
     }
 
