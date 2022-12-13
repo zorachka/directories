@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Zorachka\Framework\Directories;
 
 use Psr\Container\ContainerInterface;
-use Zorachka\Framework\Container\ServiceProvider;
+use Zorachka\Container\ServiceProvider;
 
 final class DirectoriesServiceProvider implements ServiceProvider
 {
