@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "zorachka/container": "^2.0"
+        "zorachka/container": "^3.0"
     },
     "require-dev": {
         "pestphp/pest": "^1.21",
@@ -33,7 +33,10 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
