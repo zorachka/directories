@@ -2,19 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Zorachka\Framework\Directories;
+namespace Zorachka\Directories;
 
 use Webmozart\Assert\Assert;
-use Zorachka\Framework\Directories\Exception\DirectoryWithAliasAlreadyExists;
+use Zorachka\Directories\Exception\DirectoryWithAliasAlreadyExists;
 
 final class DirectoriesConfig
 {
+    /**
+     * @var array<string, string>
+     */
     private array $directories = [];
 
     private function __construct()
     {
     }
 
+    /**
+     * @param array<string, string> $directories
+     * @return static
+     */
     public static function withDefaults(array $directories = []): self
     {
         $self = new self();
@@ -29,6 +36,9 @@ final class DirectoriesConfig
         return $self;
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function directories(): array
     {
         return $this->directories;
@@ -38,7 +48,6 @@ final class DirectoriesConfig
      * @param string $alias Directory alias, ie. "@public".
      * @param string $path Directory path without ending slash.
      * @param bool $rewrite Ability to rewrite path with existing alias.
-     * @return DirectoriesConfig
      */
     public function withDirectory(string $alias, string $path, bool $rewrite = false): self
     {
@@ -52,7 +61,7 @@ final class DirectoriesConfig
         $hasDirectory = array_key_exists($alias, $new->directories);
         if ($hasDirectory && !$rewrite) {
             throw new DirectoryWithAliasAlreadyExists(
-                \sprintf('Directory alias "%s" already exists with "%" path', $alias, $path)
+                \sprintf('Directory alias "%s" already exists with "%s" path', $alias, $path)
             );
         }
 
