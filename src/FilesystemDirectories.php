@@ -2,15 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Zorachka\Framework\Directories;
+namespace Zorachka\Directories;
 
-use Zorachka\Framework\Directories\Exception\CouldNotFindDirectoryWithAlias;
+use Zorachka\Directories\Exception\CouldNotFindDirectoryWithAlias;
 
 final class FilesystemDirectories implements Directories
 {
+    /**
+     * @param array<string, string> $directories
+     */
     private function __construct(
         private array $directories,
-    ) {}
+    ) {
+    }
 
     public static function fromConfig(DirectoriesConfig $config): self
     {
@@ -20,16 +24,13 @@ final class FilesystemDirectories implements Directories
     }
 
     /**
-     * @inheritDoc
+     *
      */
     public function has(string $alias): bool
     {
         return array_key_exists($alias, $this->directories);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function get(string $alias): string
     {
         if (!$this->has($alias)) {
@@ -54,6 +55,7 @@ final class FilesystemDirectories implements Directories
             $matchedDirectory = $this->get($matchedAlias);
             $replaced = \preg_replace('/' . $matchedAlias . '/', $matchedDirectory, $directory);
 
+            /** @phpstan-ignore-next-line */
             return str_replace(['\\', '//'], '/', $replaced);
         }
 
