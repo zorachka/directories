@@ -9,16 +9,14 @@ use Zorachka\Container\ServiceProvider;
 
 final class DirectoriesServiceProvider implements ServiceProvider
 {
-    /**
-     *
-     */
     public static function getDefinitions(): array
     {
         return [
-            Directories::class => static function (ContainerInterface $container): void {
+            Directories::class => static function (ContainerInterface $container): Directories {
                 /** @var DirectoriesConfig $directoriesConfig */
                 $directoriesConfig = $container->get(DirectoriesConfig::class);
-                FilesystemDirectories::fromConfig(
+
+                return FilesystemDirectories::fromConfig(
                     $directoriesConfig
                 );
             },
@@ -26,9 +24,6 @@ final class DirectoriesServiceProvider implements ServiceProvider
         ];
     }
 
-    /**
-     *
-     */
     public static function getExtensions(): array
     {
         return [];
